@@ -1,5 +1,4 @@
 # cinematic
 A movie ticket booking system created using Spring Boot, Spring Data JPA/MySQL, Hibernate
 
-## er model
-https://www.lucidchart.com/invitations/accept/717b2a94-a3b8-44b6-b556-0c4b482b931c
+<img width="666" alt="image" src="https://github.com/Ponselvi/MovieTicket_SAP_Selvi/assets/28100382/8f38413e-6181-4da5-b62a-c380b8359c64">
