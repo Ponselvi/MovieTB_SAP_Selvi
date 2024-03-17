@@ -12,6 +12,7 @@ import java.util.List;
 public class AuditoriumController {
     private AuditoriumService auditoriumService;
 
+
     @Autowired
     public AuditoriumController(AuditoriumService auditoriumService) {
         this.auditoriumService = auditoriumService;
