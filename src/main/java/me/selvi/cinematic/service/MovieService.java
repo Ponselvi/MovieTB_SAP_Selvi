@@ -20,4 +20,5 @@ public interface MovieService {
     List<Screening> getAllScreeningByMovieId(Long movie_id);
 
     List<Screening> getAllScreeningByMovieIdAndDate(Long movie_id, LocalDate localDate);
+
 }
