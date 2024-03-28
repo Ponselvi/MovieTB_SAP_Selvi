@@ -53,6 +53,7 @@ public class MovieController {
 
     @PostMapping(value = "/movies", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Movie addMovie(@RequestBody Movie movie) {
+
         return movieService.pushMovie(movie);
     }
 }

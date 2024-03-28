@@ -1,6 +1,7 @@
 package me.selvi.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,12 +24,12 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "screening_id")
-    @JsonManagedReference
+   // @JsonManagedReference
     private Screening screening;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+   // @JsonManagedReference
     private User user;
 
     @Column(name = "booking_time")
@@ -41,6 +42,7 @@ public class Booking {
     private boolean isActive;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    @JsonBackReference
+   // @JsonBackReference
+    @JsonIgnoreProperties("booking")
     private Set<SeatBooked> bookedSeats;
 }

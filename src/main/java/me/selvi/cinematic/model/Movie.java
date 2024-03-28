@@ -1,6 +1,7 @@
 package me.selvi.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,7 @@ public class Movie {
     private Integer duration;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    @JsonBackReference
+   // @JsonBackReference
+    @JsonIgnoreProperties("movie")
     private Set<Screening> screenings;
 }

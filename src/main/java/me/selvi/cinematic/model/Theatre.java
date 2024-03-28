@@ -1,6 +1,7 @@
 package me.selvi.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Theatre {
     private String name;
 
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnoreProperties("theatre")
     private Set<Auditorium> auditoriums;
 }

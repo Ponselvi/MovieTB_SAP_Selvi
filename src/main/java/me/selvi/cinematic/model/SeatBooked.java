@@ -21,16 +21,16 @@ public class SeatBooked {
 
     @ManyToOne
     @JoinColumn(name = "seat_id")
-    @JsonManagedReference
+   // @JsonManagedReference
     private Seat seat;
 
     @ManyToOne
     @JoinColumn(name = "booking_id")
-    @JsonManagedReference
+   // @JsonManagedReference
     private Booking booking;
 
     @ManyToOne
     @JoinColumn(name = "screening_id")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Screening screening;
 }

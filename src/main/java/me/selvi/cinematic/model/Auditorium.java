@@ -1,6 +1,7 @@
 package me.selvi.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +26,16 @@ public class Auditorium {
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
-    @JsonManagedReference
+   // @JsonManagedReference
     private Theatre theatre;
 
     @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
-    @JsonBackReference
+   // @JsonBackReference
+    @JsonIgnoreProperties("auditorium")
     private Set<Seat> seats;
 
     @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnoreProperties("auditorium")
     private Set<Screening> screenings;
 }

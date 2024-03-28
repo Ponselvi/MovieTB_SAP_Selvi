@@ -5,6 +5,7 @@ import me.selvi.cinematic.model.Theatre;
 import me.selvi.cinematic.service.TheatreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class TheatreController {
         return theatreService.getAllTheatres();
     }
 
-    @PostMapping(value = "/theatres", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "/theatres", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Theatre addTheater(@RequestBody Theatre theatre) {
         return theatreService.pushTheatre(theatre);
     }
@@ -31,5 +32,11 @@ public class TheatreController {
     @PutMapping(value = "/theatres")
     public Theatre updateTheater(@RequestBody Theatre theatre, long theaterId) {
         return theatreService.updateTheatre(theatre, theaterId);
+    }
+
+    @DeleteMapping("/theatres/{theaterId}")
+    public ResponseEntity<?> deleteTheatreById(@PathVariable long theaterId) {
+        theatreService.deleteTheatreById(theaterId);
+        return ResponseEntity.noContent().build();
     }
 }

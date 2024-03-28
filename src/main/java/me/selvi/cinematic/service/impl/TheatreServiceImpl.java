@@ -30,7 +30,7 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public Theatre pushTheatre(Theatre newTheatre) {
-        return null;
+        return theatreRepository.save(newTheatre);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class TheatreServiceImpl implements TheatreService {
 
     @Override
     public void deleteTheatreById(Long theatre_id) {
-
+        theatreRepository.deleteById(theatre_id);
     }
 }
