@@ -13,10 +13,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,17 +41,39 @@ public class ScreeningServiceImpl implements ScreeningService {
 
     @Override
     public Screening getScreeningById(Long screening_id) {
-        return screeningRepository.findById(screening_id).orElseThrow(ScreeningNotFoundException:: new);
+        return screeningRepository.findById(screening_id).orElseThrow(() -> new ScreeningNotFoundException("No Screening Found"));
     }
 
     @Override
     public Screening pushScreening(Screening newScreening) {
-        return null;
+        return screeningRepository.save(newScreening);
     }
 
     @Override
-    public Screening updateScreening(Screening updatedScreening, Long screening_id) {
-        return null;
+    public Screening updateScreening(Screening updatedScreening, String movieTitle, LocalDate chosenDate,
+                                     LocalTime localTime) {
+        Movie movie = movieService.getMovieByTitle(movieTitle);
+        Screening existingScreening = screeningRepository.findByMovieIdAndDateAndStartTime(movie.getId(), chosenDate, localTime);
+
+        if(existingScreening == null) {
+            throw new ScreeningNotFoundException("The screening is not found to update");
+        }
+
+        existingScreening.setAuditorium(updatedScreening.getAuditorium());
+        existingScreening.setEndTime(updatedScreening.getEndTime());
+        existingScreening.setPrice(updatedScreening.getPrice());
+        existingScreening.setMovie(updatedScreening.getMovie());
+        existingScreening.setStartTime(updatedScreening.getStartTime());
+        existingScreening.setDate(updatedScreening.getDate());
+
+        return screeningRepository.save(existingScreening);
+    }
+
+    @Override
+    public void deleteScreening(String movieTitle, LocalDate chosenDate,
+                                    LocalTime localTime) {
+        Movie movie = movieService.getMovieByTitle(movieTitle);
+        screeningRepository.deleteByMovieIdAndDateAndStartTime(movie.getId(), chosenDate, localTime);
     }
 
     @Override

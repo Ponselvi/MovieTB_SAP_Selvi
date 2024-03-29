@@ -8,11 +8,9 @@ import me.selvi.cinematic.service.ScreeningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -58,6 +56,28 @@ public class ScreeningController {
         return ResponseEntity.status(HttpStatus.OK).body(seats);
     }
 
+    @PostMapping(value = "/screenings", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Screening addScreening(@RequestBody Screening screening) {
+        return screeningService.pushScreening(screening);
+    }
+
+    @PutMapping(value = "/screenings/{movieTitle}/{chosenDate}/{localTime}")
+    public Screening updateScreening(@RequestBody Screening screening, @PathVariable String movieTitle,
+                                     @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate chosenDate,
+                                     @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime localTime) {
+        return screeningService.updateScreening(screening, movieTitle, chosenDate, localTime);
+    }
+
+    @DeleteMapping("/theatres/{movieTitle}/{chosenDate}/{localTime}")
+    public ResponseEntity<?> deleteScreeningById(@PathVariable String movieTitle,
+                                                 @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate chosenDate,
+                                                 @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime localTime) {
+        screeningService.deleteScreening(movieTitle, chosenDate,
+                localTime);
+        return ResponseEntity.noContent().build();
+    }
+
+
     @GetMapping("/screenings/{movieTitle}/{chosenDate}/{cityName}")
     public ResponseEntity<?> browseTheatresByMovieAndDate(@PathVariable String movieTitle,
                                                           @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate chosenDate,
@@ -76,7 +96,6 @@ public class ScreeningController {
                 theaterLocalTime.computeIfAbsent(theatre.getName(), k -> new ArrayList<>()).add(screening.getStartTime());
             }
         }
-
        
         return ResponseEntity.status(HttpStatus.OK).body(theaterLocalTime);
     }
