@@ -107,6 +107,7 @@ CREATE TABLE `movie` (
                          `genre` varchar(255) DEFAULT NULL,
                          `poster` varchar(255) DEFAULT NULL,
                          `title` varchar(255) DEFAULT NULL,
+                         `language` varchar(255) default null,
                          PRIMARY KEY (`movie_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -117,7 +118,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (2,140,'Action',NULL,'Hobbs And Shaw'),(3,150,'Action',NULL,'Men In Black'),(4,135,'Drama',NULL,'Sacred Games'),(5,140,'Adventure',NULL,'Aladdin'),(6,150,'Drama',NULL,'Mission Mangal');
+INSERT INTO `movie` VALUES (2,140,'Action',NULL,'Hobbs And Shaw','English'),(3,150,'Action',NULL,'Men In Black','English'),(4,135,'Drama',NULL,'Sacred Games','English'),(5,140,'Adventure',NULL,'Aladdin','English'),(6,150,'Drama',NULL,'Mission Mangal','English');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +137,7 @@ CREATE TABLE `screening` (
                              `auditorium_id` bigint(20) DEFAULT NULL,
                              `movie_id` bigint(20) DEFAULT NULL,
                              `price` double DEFAULT NULL,
-                             `is_full` bit(1) DEFAULT b'0',
+                             `is_full` boolean DEFAULT false,
                              PRIMARY KEY (`screening_id`),
                              KEY `FKc5jmfksm86w9sooy5fdy6xa3c` (`auditorium_id`),
                              KEY `FKfp7sh76xc9m508stllspchnp9` (`movie_id`)
@@ -149,7 +150,7 @@ CREATE TABLE `screening` (
 
 LOCK TABLES `screening` WRITE;
 /*!40000 ALTER TABLE `screening` DISABLE KEYS */;
-INSERT INTO `screening` VALUES (5,'2019-08-16','12:00:00','10:00:00',2,2,_binary '\0'),(6,'2019-08-16','15:00:00','13:00:00',2,2,_binary '\0'),(7,'2019-08-16','18:00:00','16:00:00',2,2,_binary '\0'),(8,'2019-08-16','21:00:00','19:00:00',2,2,_binary '\0'),(9,'2019-08-16','12:00:00','10:00:00',4,3,_binary '\0'),(10,'2019-08-16','15:00:00','13:00:00',4,3,_binary '\0'),(11,'2019-08-16','18:00:00','16:00:00',4,3,_binary '\0'),(12,'2019-08-17','21:00:00','19:00:00',4,3,_binary '\0');
+INSERT INTO `screening` VALUES (5,'2019-08-16','12:00:00','10:00:00',2,2,400, false),(6,'2019-08-16','15:00:00','13:00:00',2,2,750, false),(7,'2019-08-16','18:00:00','16:00:00',2,2,200, false),(8,'2019-08-16','21:00:00','19:00:00',2,2,270, false),(9,'2019-08-16','12:00:00','10:00:00',4,3,657, false),(10,'2019-08-16','15:00:00','13:00:00',4,3,234, false),(11,'2019-08-16','18:00:00','16:00:00',4,3,980, false),(12,'2019-08-17','21:00:00','19:00:00',4,3,900, false);
 /*!40000 ALTER TABLE `screening` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,6 +218,7 @@ DROP TABLE IF EXISTS `theatre`;
 CREATE TABLE `theatre` (
                            `theatre_id` bigint(20) NOT NULL,
                            `name` varchar(255) DEFAULT NULL,
+                           `city_name` varchar(255) DEFAULT NULL,
                            PRIMARY KEY (`theatre_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -227,7 +229,7 @@ CREATE TABLE `theatre` (
 
 LOCK TABLES `theatre` WRITE;
 /*!40000 ALTER TABLE `theatre` DISABLE KEYS */;
-INSERT INTO `theatre` VALUES (1,'PVR'),(2,'INOX');
+INSERT INTO `theatre` VALUES (1,'PVR', 'Bglr'),(2,'INOX', 'Bglr');
 /*!40000 ALTER TABLE `theatre` ENABLE KEYS */;
 UNLOCK TABLES;
 

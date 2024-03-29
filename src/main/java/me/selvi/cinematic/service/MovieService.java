@@ -11,6 +11,8 @@ public interface MovieService {
 
     Movie getMovieById(Long movie_id);
 
+    Movie getMovieByTitle(String title);
+
     Movie pushMovie(Movie newMovie);
 
     Movie updateMovie(Movie updatedMovie, Long movie_id);

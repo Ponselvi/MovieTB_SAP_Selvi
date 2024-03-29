@@ -40,6 +40,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Movie getMovieByTitle(String title) {
+        return movieRepository.findByTitle(title);
+    }
+
+    @Override
     public Movie updateMovie(Movie updatedMovie, Long movie_id) {
         return null;
     }
@@ -60,4 +65,6 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = getMovieById(movie_id);
         return movie.getScreenings().stream().filter(screening -> screening.getDate().equals(date)).collect(Collectors.toList());
     }
+
+
 }

@@ -33,6 +33,9 @@ public class Movie {
     @Column(name = "duration")
     private Integer duration;
 
+    @Column(name = "language")
+    private String language;
+
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
    // @JsonBackReference
     @JsonIgnoreProperties("movie")

@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long user_id) {
-        return null;
+    public User getUserByName(String user_name) {
+        return userRepository.findByUserName(user_name);
     }
 
     @Override
     public User pushUser(User newUser) {
-        return null;
+        return userRepository.save(newUser);
     }
 
     @Override

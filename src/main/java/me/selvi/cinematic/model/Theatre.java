@@ -21,6 +21,9 @@ public class Theatre {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "cityName")
+    private String cityName;
+
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
     //@JsonBackReference
     @JsonIgnoreProperties("theatre")
