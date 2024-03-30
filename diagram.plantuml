@@ -1,0 +1,392 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Auditorium {
+  + Auditorium(): 
+  - id: Long
+  - theatre: Theatre
+  - seats: Set<Seat>
+  - seatCount: Integer
+  - screenings: Set<Screening>
+   id: Long
+   seatCount: Integer
+   theatre: Theatre
+   screenings: Set<Screening>
+   seats: Set<Seat>
+}
+class AuditoriumController {
+  + AuditoriumController(AuditoriumService): 
+   allTheatres: List<Auditorium>
+}
+class AuditoriumNotFoundException {
+  + AuditoriumNotFoundException(Long): 
+}
+interface AuditoriumRepository << interface >>
+interface AuditoriumService << interface >> {
+  + pushAuditorium(Auditorium): Auditorium
+  + deleteAuditoriumById(Long): void
+  + getAuditoriumById(Long): Auditorium
+  + updateAuditorium(Auditorium, Long): Auditorium
+   allAuditoriums: List<Auditorium>
+}
+class AuditoriumServiceImpl {
+  + AuditoriumServiceImpl(AuditoriumRepository): 
+  + getAuditoriumById(Long): Auditorium
+  + pushAuditorium(Auditorium): Auditorium
+  + updateAuditorium(Auditorium, Long): Auditorium
+  + deleteAuditoriumById(Long): void
+   allAuditoriums: List<Auditorium>
+}
+class Booking {
+  + Booking(): 
+  - bookingTime: LocalTime
+  - bookedSeats: Set<SeatBooked>
+  - screening: Screening
+  - user: User
+  - id: Long
+  - isActive: boolean
+  - isBooked: boolean
+   screening: Screening
+   isBooked: boolean
+   bookingTime: LocalTime
+   id: Long
+   isActive: boolean
+   user: User
+   bookedSeats: Set<SeatBooked>
+}
+class BookingController {
+  + BookingController(BookingService): 
+   allBookings: List<Booking>
+}
+interface BookingRepository << interface >>
+interface BookingService << interface >> {
+  + deleteBookingById(Long): void
+  + getBookingById(Long): Booking
+  + updateBooking(Booking, Long): Booking
+  + pushBooking(Booking): Booking
+   allBookings: List<Booking>
+}
+class BookingServiceImpl {
+  + BookingServiceImpl(BookingRepository): 
+  + getBookingById(Long): Booking
+  + deleteBookingById(Long): void
+  + pushBooking(Booking): Booking
+  + updateBooking(Booking, Long): Booking
+   allBookings: List<Booking>
+}
+class CinematicApplication {
+  + CinematicApplication(): 
+  + main(String[]): void
+}
+class CinematicApplicationTests {
+  + CinematicApplicationTests(): 
+  + contextLoads(): void
+}
+class DeleteSevenDayOldScreening {
+  + DeleteSevenDayOldScreening(ScreeningRepository): 
+  + deleteSevenDayOldScreening(): void
+}
+class DevBootstrap {
+  + DevBootstrap(): 
+}
+class ErrorDetail {
+  + ErrorDetail(Date, String, String): 
+  - details: String
+  - timestamp: Date
+  - message: String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+   details: String
+   timestamp: Date
+   message: String
+}
+class HousefullException {
+  + HousefullException(): 
+}
+class Movie {
+  + Movie(): 
+  - poster: String
+  - title: String
+  - genre: String
+  - duration: Integer
+  - id: Long
+  - screenings: Set<Screening>
+   duration: Integer
+   title: String
+   id: Long
+   poster: String
+   genre: String
+   screenings: Set<Screening>
+}
+class MovieController {
+  + MovieController(MovieService): 
+  + getAllScreeningByMovieId(Long): ResponseEntity<?>
+  + getMovieById(Long): ResponseEntity<?>
+  + addMovie(Movie): Movie
+  + deleteMovieById(Long): ResponseEntity<?>
+  + getAllMovies(Map<String, String>): ResponseEntity<?>
+}
+class MovieNotFoundException {
+  + MovieNotFoundException(Long): 
+}
+interface MovieRepository << interface >>
+interface MovieService << interface >> {
+  + updateMovie(Movie, Long): Movie
+  + deleteMovie(Long): void
+  + getMovieById(Long): Movie
+  + getAllScreeningByMovieIdAndDate(Long, LocalDate): List<Screening>
+  + pushMovie(Movie): Movie
+  + getAllScreeningByMovieId(Long): List<Screening>
+   allMovies: List<Movie>
+}
+class MovieServiceImpl {
+  + MovieServiceImpl(MovieRepository): 
+  + deleteMovie(Long): void
+  + pushMovie(Movie): Movie
+  + getMovieById(Long): Movie
+  + getAllScreeningByMovieId(Long): List<Screening>
+  + updateMovie(Movie, Long): Movie
+  + getAllScreeningByMovieIdAndDate(Long, LocalDate): List<Screening>
+   allMovies: List<Movie>
+}
+class Screening {
+  + Screening(): 
+  - isFull: Boolean
+  - startTime: LocalTime
+  - bookings: Set<Booking>
+  - movie: Movie
+  - date: LocalDate
+  - price: Double
+  - bookedSeats: Set<SeatBooked>
+  - endTime: LocalTime
+  - auditorium: Auditorium
+  - id: Long
+   bookings: Set<Booking>
+   movie: Movie
+   id: Long
+   endTime: LocalTime
+   auditorium: Auditorium
+   date: LocalDate
+   price: Double
+   startTime: LocalTime
+   isFull: Boolean
+   bookedSeats: Set<SeatBooked>
+}
+class ScreeningController {
+  + ScreeningController(ScreeningService): 
+  + getAllScreenings(Map<String, String>): ResponseEntity<?>
+  + getScreenById(Long): ResponseEntity<?>
+  + getSeatsByScreeningId(Long): ResponseEntity<?>
+}
+class ScreeningExceptionHandler {
+  + ScreeningExceptionHandler(): 
+  + handleHouseFullException(HousefullException, WebRequest): ResponseEntity<?>
+}
+class ScreeningNotFoundException {
+  + ScreeningNotFoundException(): 
+}
+interface ScreeningRepository << interface >>
+interface ScreeningService << interface >> {
+  + getScreeningById(Long): Screening
+  + getAllScreenings(LocalDate, LocalDate): List<Screening>
+  + pushScreening(Screening): Screening
+  + getSeatsByScreeningId(Long): List<Seat>
+  + updateScreening(Screening, Long): Screening
+   allScreenings: List<Screening>
+}
+class ScreeningServiceImpl {
+  + ScreeningServiceImpl(ScreeningRepository): 
+  + getAllScreenings(LocalDate, LocalDate): List<Screening>
+  + getScreeningById(Long): Screening
+  + updateScreening(Screening, Long): Screening
+  + pushScreening(Screening): Screening
+  + getSeatsByScreeningId(Long): List<Seat>
+   allScreenings: List<Screening>
+}
+class Seat {
+  + Seat(): 
+  - seatNumber: Integer
+  - auditorium: Auditorium
+  - bookedSeats: Set<SeatBooked>
+  - id: Long
+   id: Long
+   seatNumber: Integer
+   auditorium: Auditorium
+   bookedSeats: Set<SeatBooked>
+}
+class SeatBooked {
+  + SeatBooked(): 
+  - id: Long
+  - seat: Seat
+  - screening: Screening
+  - booking: Booking
+   screening: Screening
+   booking: Booking
+   seat: Seat
+   id: Long
+}
+class SeatBookedController {
+  + SeatBookedController(SeatBookedService): 
+   allSeatBooked: List<SeatBooked>
+}
+interface SeatBookedRepository << interface >>
+interface SeatBookedService << interface >> {
+  + getSeatBookedById(Long): SeatBooked
+  + updateSeatBooked(SeatBooked, Long): SeatBooked
+  + pushSeatBooked(SeatBooked): SeatBooked
+  + deleteSeatBookedById(Long): void
+   allSeatBooked: List<SeatBooked>
+}
+class SeatBookedServiceImpl {
+  + SeatBookedServiceImpl(SeatBookedRepository): 
+  + getSeatBookedById(Long): SeatBooked
+  + updateSeatBooked(SeatBooked, Long): SeatBooked
+  + deleteSeatBookedById(Long): void
+  + pushSeatBooked(SeatBooked): SeatBooked
+   allSeatBooked: List<SeatBooked>
+}
+class SeatController {
+  + SeatController(SeatService): 
+   allSeats: List<Seat>
+}
+interface SeatRepository << interface >>
+interface SeatService << interface >> {
+  + getSeatById(Long): Seat
+  + updateSeat(Seat, Long): Seat
+  + pushSeat(Seat): Seat
+  + deleteSeatById(Long): void
+   allSeats: List<Seat>
+}
+class SeatServiceImpl {
+  + SeatServiceImpl(SeatRepository): 
+  + pushSeat(Seat): Seat
+  + updateSeat(Seat, Long): Seat
+  + deleteSeatById(Long): void
+  + getSeatById(Long): Seat
+   allSeats: List<Seat>
+}
+class SwaggerConfig {
+  + SwaggerConfig(): 
+  + api(): Docket
+  - apiInfo(): ApiInfo
+}
+class Theatre {
+  + Theatre(): 
+  - id: Long
+  - name: String
+  - auditoriums: Set<Auditorium>
+   name: String
+   id: Long
+   auditoriums: Set<Auditorium>
+}
+class TheatreController {
+  + TheatreController(TheatreService): 
+  + updateTheater(Theatre, long): Theatre
+  + addTheater(Theatre): Theatre
+   allTheatres: List<Theatre>
+}
+interface TheatreRepository << interface >>
+interface TheatreService << interface >> {
+  + pushTheatre(Theatre): Theatre
+  + getTheatreById(Long): Theatre
+  + updateTheatre(Theatre, Long): Theatre
+  + deleteTheatreById(Long): void
+   allTheatres: List<Theatre>
+}
+class TheatreServiceImpl {
+  + TheatreServiceImpl(TheatreRepository): 
+  + updateTheatre(Theatre, Long): Theatre
+  + deleteTheatreById(Long): void
+  + pushTheatre(Theatre): Theatre
+  + getTheatreById(Long): Theatre
+   allTheatres: List<Theatre>
+}
+class User {
+  + User(): 
+  - id: int
+  - bookings: Set<Booking>
+  - userName: String
+  - password: String
+   password: String
+   id: int
+   bookings: Set<Booking>
+   userName: String
+}
+class UserController {
+  + UserController(UserService): 
+   allUsers: List<User>
+}
+interface UserRepository << interface >>
+interface UserService << interface >> {
+  + deleteUserById(Long): void
+  + pushUser(User): User
+  + updateUser(User, Long): User
+  + getUserById(Long): User
+   allUsers: List<User>
+}
+class UserServiceImpl {
+  + UserServiceImpl(UserRepository): 
+  + deleteUserById(Long): void
+  + getUserById(Long): User
+  + updateUser(User, Long): User
+  + pushUser(User): User
+   allUsers: List<User>
+}
+class WebConfig {
+  + WebConfig(): 
+  + configureContentNegotiation(ContentNegotiationConfigurer): void
+}
+
+Auditorium                  "1" *-[#595959,plain]-> "screenings\n*" Screening                   
+Auditorium                  "1" *-[#595959,plain]-> "seats\n*" Seat                        
+Auditorium                  "1" *-[#595959,plain]-> "theatre\n1" Theatre                     
+AuditoriumController        "1" *-[#595959,plain]-> "auditoriumService\n1" AuditoriumService           
+AuditoriumServiceImpl        -[#595959,dashed]->  AuditoriumNotFoundException : "«create»"
+AuditoriumServiceImpl       "1" *-[#595959,plain]-> "auditoriumRepository\n1" AuditoriumRepository        
+AuditoriumServiceImpl        -[#008200,dashed]-^  AuditoriumService           
+Booking                     "1" *-[#595959,plain]-> "screening\n1" Screening                   
+Booking                     "1" *-[#595959,plain]-> "bookedSeats\n*" SeatBooked                  
+Booking                     "1" *-[#595959,plain]-> "user\n1" User                        
+BookingController           "1" *-[#595959,plain]-> "bookingService\n1" BookingService              
+BookingServiceImpl          "1" *-[#595959,plain]-> "bookingRepository\n1" BookingRepository           
+BookingServiceImpl           -[#008200,dashed]-^  BookingService              
+DeleteSevenDayOldScreening  "1" *-[#595959,plain]-> "screeningRepository\n1" ScreeningRepository         
+Movie                       "1" *-[#595959,plain]-> "screenings\n*" Screening                   
+MovieController             "1" *-[#595959,plain]-> "movieService\n1" MovieService                
+MovieServiceImpl             -[#595959,dashed]->  MovieNotFoundException      : "«create»"
+MovieServiceImpl            "1" *-[#595959,plain]-> "movieRepository\n1" MovieRepository             
+MovieServiceImpl             -[#008200,dashed]-^  MovieService                
+Screening                   "1" *-[#595959,plain]-> "auditorium\n1" Auditorium                  
+Screening                   "1" *-[#595959,plain]-> "bookings\n*" Booking                     
+Screening                   "1" *-[#595959,plain]-> "movie\n1" Movie                       
+Screening                   "1" *-[#595959,plain]-> "bookedSeats\n*" SeatBooked                  
+ScreeningController          -[#595959,dashed]->  HousefullException          : "«create»"
+ScreeningController         "1" *-[#595959,plain]-> "screeningService\n1" ScreeningService            
+ScreeningExceptionHandler    -[#595959,dashed]->  ErrorDetail                 : "«create»"
+ScreeningServiceImpl        "1" *-[#595959,plain]-> "screeningRepository\n1" ScreeningRepository         
+ScreeningServiceImpl         -[#008200,dashed]-^  ScreeningService            
+Seat                        "1" *-[#595959,plain]-> "auditorium\n1" Auditorium                  
+Seat                        "1" *-[#595959,plain]-> "bookedSeats\n*" SeatBooked                  
+SeatBooked                  "1" *-[#595959,plain]-> "booking\n1" Booking                     
+SeatBooked                  "1" *-[#595959,plain]-> "screening\n1" Screening                   
+SeatBooked                  "1" *-[#595959,plain]-> "seat\n1" Seat                        
+SeatBookedController        "1" *-[#595959,plain]-> "seatBookedService\n1" SeatBookedService           
+SeatBookedServiceImpl       "1" *-[#595959,plain]-> "seatBookedRepository\n1" SeatBookedRepository        
+SeatBookedServiceImpl        -[#008200,dashed]-^  SeatBookedService           
+SeatController              "1" *-[#595959,plain]-> "seatService\n1" SeatService                 
+SeatServiceImpl             "1" *-[#595959,plain]-> "seatRepository\n1" SeatRepository              
+SeatServiceImpl              -[#008200,dashed]-^  SeatService                 
+Theatre                     "1" *-[#595959,plain]-> "auditoriums\n*" Auditorium                  
+TheatreController           "1" *-[#595959,plain]-> "theatreService\n1" TheatreService              
+TheatreServiceImpl          "1" *-[#595959,plain]-> "theatreRepository\n1" TheatreRepository           
+TheatreServiceImpl           -[#008200,dashed]-^  TheatreService              
+User                        "1" *-[#595959,plain]-> "bookings\n*" Booking                     
+UserController              "1" *-[#595959,plain]-> "userService\n1" UserService                 
+UserServiceImpl             "1" *-[#595959,plain]-> "userRepository\n1" UserRepository              
+UserServiceImpl              -[#008200,dashed]-^  UserService                 
+@enduml

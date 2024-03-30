@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -68,7 +69,8 @@ public class ScreeningController {
         return screeningService.updateScreening(screening, movieTitle, chosenDate, localTime);
     }
 
-    @DeleteMapping("/theatres/{movieTitle}/{chosenDate}/{localTime}")
+    @DeleteMapping("/screenings/{movieTitle}/{chosenDate}/{localTime}")
+    @Transactional
     public ResponseEntity<?> deleteScreeningById(@PathVariable String movieTitle,
                                                  @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate chosenDate,
                                                  @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime localTime) {
