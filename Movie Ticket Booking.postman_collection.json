@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "47a0595c-7817-45ee-a32a-b4e6368e404e",
+		"name": "Movie Ticket Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7583151",
+		"_collection_link": "https://blue-trinity-885632.postman.co/workspace/Personal~cc6d653f-c52e-4375-a93c-8c0b4b607d5b/collection/7583151-47a0595c-7817-45ee-a32a-b4e6368e404e?action=share&source=collection_link&creator=7583151"
+	},
+	"item": [
+		{
+			"name": "Show Operations",
+			"item": [
+				{
+					"name": "Screenings - Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"movie\": {\r\n       \"id\": 6 \r\n    },\r\n    \"auditorium\": \r\n    { \"id\": 5\r\n    },\r\n    \r\n    \"date\": \"2024-03-30\",\r\n  \"startTime\": \"21:00:00\",\r\n  \"endTime\": \"22:30:00\",\r\n  \"isFull\": false,\r\n  \"price\": 10.50\r\n  \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/screenings/Mission Mangal/2024-03-30/19:00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"screenings",
+								"Mission Mangal",
+								"2024-03-30",
+								"19:00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Screenings - Delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n    \"movie\": {\r\n       \"id\": 6 \r\n    },\r\n    \"auditorium\": \r\n    { \"id\": 5\r\n    },\r\n    \r\n    \"date\": \"2024-03-30\",\r\n  \"startTime\": \"09:00:00\",\r\n  \"endTime\": \"21:30:00\",\r\n  \"isFull\": false,\r\n  \"price\": 10.50\r\n  \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/screenings/Mission Mangal/2024-03-30/21:00",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"screenings",
+								"Mission Mangal",
+								"2024-03-30",
+								"21:00"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Screenings",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movie\": {\r\n        \"id\": 6\r\n    },\r\n    \"auditorium\": {\r\n        \"id\": 5\r\n    },\r\n    \"date\": \"2024-03-30\",\r\n    \"startTime\": \"20:00:00\",\r\n    \"endTime\": \"21:30:00\",\r\n    \"isFull\": false,\r\n    \"price\": 10.50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/screenings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"screenings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Screening - Theaters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/screenings/Mission Mangal/2024-03-30/Bglr",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"screenings",
+								"Mission Mangal",
+								"2024-03-30",
+								"Bglr"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Theater Opertaions",
+			"item": [
+				{
+					"name": "Theater - Create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"name\":\"PLOE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/theatres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theatres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Theater - Delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 21,\r\n\"name\":\"PLO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/theatres/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theatres",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Theater - Update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 21,\r\n\"name\":\"PLO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/theatres?theaterId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theatres"
+							],
+							"query": [
+								{
+									"key": "theaterId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Theater - retrieval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/theatres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theatres"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies operations",
+			"item": [
+				{
+					"name": "Movies - Create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 25,\r\n\"title\": \"Tamil Movie\",\r\n\"poster\": null,\r\n\"genre\": \"ActionCumFamily\",\r\n\"duration\": 140\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movies - retrieval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": {\r\n    \"userName\":\"selvi\"\r\n  },\r\n  \"screening\": {\r\n    \"id\": 456,\r\n    \"movie\": {\r\n      \"id\": 789,\r\n      \"title\": \"Movie Title\",\r\n      \"poster\": \"Movie Poster URL\",\r\n      \"genre\": \"Movie Genre\",\r\n      \"duration\": 120\r\n    }\r\n  },\r\n  \"bookedSeats\": [\r\n    {\"seatNumber\": \"A1\"},\r\n    {\"seatNumber\": \"B2\"}\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"userName\":\"selvi\",\r\n\"password\":\"selvi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
